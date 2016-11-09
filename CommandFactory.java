@@ -4,6 +4,10 @@ package zeitz_borkv3;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * javadoc
+ * @author burns_000
+ */
 public class CommandFactory {
 
     private static CommandFactory theInstance;
