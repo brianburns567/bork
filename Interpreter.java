@@ -3,7 +3,10 @@ package bork;
 
 import java.util.Scanner;
 
-
+/**
+ * Main class that the user interacts with, manages the game and user input
+ * @author Dr. Zeitz
+ */
 public class Interpreter {
 
     private static GameState state; // not strictly necessary; GameState is 
