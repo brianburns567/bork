@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
- * CommandFactory class
+ * CommandFactory class blah blah
  * @author burns_000
  */
 public class CommandFactory {
