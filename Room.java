@@ -1,5 +1,5 @@
 
-package zeitz_borkv3;
+package bork;
 
 import java.util.ArrayList;
 import java.util.Scanner;
