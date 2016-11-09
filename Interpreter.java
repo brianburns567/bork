@@ -12,6 +12,10 @@ public class Interpreter {
     public static String USAGE_MSG = 
         "Usage: Interpreter borkFile.bork|saveFile.sav.";
 
+    /**
+     * The main method for the bork project runs and initializes the game based on the input argument.
+     * @param args[] the file parameters used to create and restore the game
+     */
     public static void main(String args[]) {
 
         if (args.length < 1) {
@@ -57,6 +61,11 @@ public class Interpreter {
         }
     }
 
+    /**
+     * Prompts the user to enter a command and then returns that command to main
+     * @param commandLine the Scanner object passed in by main
+     * @return String the command entered by the user
+     */
     private static String promptUser(Scanner commandLine) {
 
         System.out.print("> ");
