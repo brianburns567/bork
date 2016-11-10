@@ -1,5 +1,7 @@
 package bork;
 
+import java.util.Scanner;
+
 /**
  *  A Weapon is a type of Item that deals damage.
  * 
@@ -12,9 +14,9 @@ public class Weapon extends Item
     /**
      * Constructs a new Weapon Item, storing the inherent damage it deals.
      * 
-     * @param damage the inherent damage the weapon deals
+     * @param s the Scanner that is reading the hydration file
      */
-    public Weapon(int damage)
+    public Weapon(Scanner s)
     {
         // code to come
     }
