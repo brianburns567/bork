@@ -8,9 +8,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+/**
+ * A class the represents the Dungeon being played by the user. It holds a collection
+ * of the rooms in the dungeon, a collection of the items in the dungeon, and has
+ * methods and constructors to hydrate from a bork or sav file, as well as write
+ * to a sav file.
+ * @author Dr. Zeitz
+ */
 public class Dungeon {
-
+    
+    /**
+     * A subclass of Exception that defines an exception encountered when unable
+     * to correctly hydrate a dungeon.
+     * @author Dr. Zeitz
+     */
     public static class IllegalDungeonFormatException extends Exception {
+        
+        /**
+         * Constructor for IllegalDungeonFormatException objects that calls the 
+         * constructor of its parent class.
+         * @param e String representing the exception
+         */
         public IllegalDungeonFormatException(String e) {
             super(e);
         }
@@ -34,7 +52,14 @@ public class Dungeon {
     private Hashtable<String,Room> rooms;
     private Hashtable<String,Item> items;
     private String filename;
-
+    
+    /**
+     * Constructor for Dungeon objects that sets the name and entry room of the
+     * Dungeon, initializes the rooms hashtable and filename variable, and calls
+     * init().
+     * @param name the name of the new Dungeon object
+     * @param entry the entry room of the new Dungeon object
+     */
     Dungeon(String name, Room entry) {
         init();
         this.filename = null;    // null indicates not hydrated from file.
@@ -46,6 +71,10 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
+     * @param filename the .bork file to hydrate from
+     * @throws a FileNotFoundException if the filename does not exist
+     * @throws an IllegalDungeonFormatException if the Dungeon can not be hydrated
+     * due to incorrect format
      */
     public Dungeon(String filename) throws FileNotFoundException, 
         IllegalDungeonFormatException {
@@ -56,6 +85,11 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it, including (possibly) the items in their original locations.
+     * @param filename the .bork file to hydrate from
+     * @param initState boolean telling whether or not to initialize the Dungeon's statae
+     * @throws a FileNotFoundException if the filename does not exist
+     * @throws an IllegalDungeonFormatException if the Dungeon can not be hydrated
+     * due to incorrect format
      */
     public Dungeon(String filename, boolean initState) 
         throws FileNotFoundException, IllegalDungeonFormatException {
@@ -120,16 +154,20 @@ public class Dungeon {
         s.close();
     }
     
-    // Common object initialization tasks, regardless of which constructor
-    // is used.
+    /**
+     * Common object initialization tasks, regardless of which constructor
+     * is used.
+     */ 
     private void init() {
         rooms = new Hashtable<String,Room>();
         items = new Hashtable<String,Item>();
     }
 
-    /*
+    /**
      * Store the current (changeable) state of this dungeon to the writer
      * passed.
+     * @param w the writer used to print to the file
+     * @throws an IOException if unable to write to the file
      */
     void storeState(PrintWriter w) throws IOException {
         w.println(FILENAME_LEADER + getFilename());
@@ -140,9 +178,11 @@ public class Dungeon {
         w.println(TOP_LEVEL_DELIM);
     }
 
-    /*
+    /**
      * Restore the (changeable) state of this dungeon to that reflected in the
      * reader passed.
+     * @param s the reader used to restore the dungeon
+     * @throws an IllegalSaveFormatException if unable to read from the SAV file
      */
     void restoreState(Scanner s) throws GameState.IllegalSaveFormatException {
 
@@ -161,12 +201,41 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Getter for entry room.
+     * @return the entry room of the dungeon
+     */
     public Room getEntry() { return entry; }
+    
+    /**
+     * Getter for name.
+     * @return the name of the dungeon
+     */
     public String getName() { return name; }
+    
+    /**
+     * Getter for filename.
+     * @return the filename to be used for hydrating the dungeon
+     */
     public String getFilename() { return filename; }
+    
+    /**
+     * Adds a room to the Dungeon's hashtable.
+     * @param room the room to be added
+     */
     public void add(Room room) { rooms.put(room.getTitle(),room); }
+    
+    /**
+     * Adds an item to the Dungeon's hashtable.
+     * @param item the item to be added
+     */
     public void add(Item item) { items.put(item.getPrimaryName(),item); }
-
+    
+    /**
+     * Finds a room in the hashtable by name.
+     * @param roomTitle the name of the room to be returned
+     * @return the corresponding room
+     */
     public Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
     }
@@ -175,6 +244,8 @@ public class Dungeon {
      * Get the Item object whose primary name is passed. This has nothing to
      * do with where the Adventurer might be, or what's in his/her inventory,
      * etc.
+     * @param primaryItemName the name of the item to be returned
+     * @return the corresponding item
      */
     public Item getItem(String primaryItemName) throws Item.NoItemException {
         

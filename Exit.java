@@ -3,13 +3,32 @@ package bork;
 
 import java.util.Scanner;
 
+/**
+ * A class that represents the means by which an adventurer leaves or enters a room. 
+ * It includes getters for the rooms that it connects, as well as the direction
+ * it represents, and can describe itself.
+ * @author Dr. Zeitz
+ */
 public class Exit {
 
+    /**
+     * A subclass of Exception that handles exceptions that result from the user
+     * trying to exit a room when there is no exit.
+     * @author Dr. Zeitz
+     */
     class NoExitException extends Exception {}
 
     private String dir;
     private Room src, dest;
 
+    /**
+     * Constructor of exit objects that sets the direction, source room, and 
+     * destination room of the exit, as well as adding the exit to the source 
+     * room's hashtable.
+     * @param dir the direction by which the exit can be accessed
+     * @param src the room to be left
+     * @param dest the room to be entered
+     */
     Exit(String dir, Room src, Room dest) {
         init();
         this.dir = dir;
@@ -19,7 +38,8 @@ public class Exit {
     }
 
     /** Given a Scanner object positioned at the beginning of an "exit" file
-        entry, read and return an Exit object representing it. 
+        entry, read and return an Exit object representing it.
+        @param s the Scanner object
         @param d The dungeon that contains this exit (so that Room objects 
         may be obtained.)
         @throws NoExitException The reader object is not positioned at the
@@ -51,15 +71,35 @@ public class Exit {
         }
     }
 
-    // Common object initialization tasks.
+    /** 
+     * Common object initialization tasks.
+     */
     private void init() {
     }
 
+    /**
+     * Describes the exit for the user.
+     * @return the String description
+     */
     String describe() {
         return "You can go " + dir + " to " + dest.getTitle() + ".";
     }
 
+    /**
+     * Getter for the direction of the exit.
+     * @return the direction
+     */
     String getDir() { return dir; }
+    
+    /**
+     * Getter for the source Room of the exit.
+     * @return the source room
+     */
     Room getSrc() { return src; }
+    
+    /**
+     * Getter for the destination Room of the exit.
+     * @return the destination room
+     */
     Room getDest() { return dest; }
 }
