@@ -1,4 +1,3 @@
-
 package bork;
 
 import java.util.ArrayList;
@@ -6,6 +5,12 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Constructs new Rooms and holds the methods needed to change or access the
+ * properties of any dungeon Room.
+ * 
+ * @author Dr. Zeitz
+ */
 public class Room {
 
     class NoRoomException extends Exception {}
@@ -18,27 +23,49 @@ public class Room {
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
 
+    /**
+     * A Room constructor that initializes with the Room title.
+     * 
+     * @param title the title of the Room
+     */
     Room(String title) {
         init();
         this.title = title;
     }
 
+    /**
+     * Constructs a room based off of data in the file attached to the given
+     * Scanner.
+     * 
+     * @param s passed by the Dungeon constructor, this is the fileScanner
+     * reading the '.bork' file
+     * @param d the Dungeon this Room belongs to
+     * @throws bork.Room.NoRoomException The reader object is not positioned at
+     * the start of a room entry. A side effect of this is the reader's cursor
+     * is now positioned one line past where it was.
+     * @throws bork.Dungeon.IllegalDungeonFormatException A structural problem
+     * with the dungeon file itself, detected when trying to read this room.
+     */
     Room(Scanner s, Dungeon d) throws NoRoomException,
         Dungeon.IllegalDungeonFormatException {
 
         this(s, d, true);
     }
-
-    /** Given a Scanner object positioned at the beginning of a "room" file
-        entry, read and return a Room object representing it. 
-        @param d The containing {@link edu.umw.stephen.bork.Dungeon} object, 
-        necessary to retrieve {@link edu.umw.stephen.bork.Item} objects.
-        @param initState should items listed for this room be added to it?
-        @throws NoRoomException The reader object is not positioned at the
-        start of a room entry. A side effect of this is the reader's cursor
-        is now positioned one line past where it was.
-        @throws IllegalDungeonFormatException A structural problem with the
-        dungeon file itself, detected when trying to read this room.
+    
+    /**
+     * Given a Scanner object positioned at the beginning of a "room" file 
+     * entry, read and return a Room object representing it. 
+     * 
+     * @param s passed by the Dungeon constructor, this is the fileScanner
+     * reading the '.bork' file
+     * @param d the Dungeon this Room belongs to, necessary to hydrate dungeon
+     * items
+     * @param initState should items listed for this room be added to it?
+     * @throws bork.Room.NoRoomException The reader object is not positioned at
+     * the start of a room entry. A side effect of this is the reader's cursor
+     * is now positioned one line past where it was.
+     * @throws bork.Dungeon.IllegalDungeonFormatException A structural problem
+     * with the dungeon file itself, detected when trying to read this room.
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
         Dungeon.IllegalDungeonFormatException {
@@ -80,20 +107,37 @@ public class Room {
         }
     }
 
-    // Common object initialization tasks.
+    /**
+     * Performs common object initialization including the Room contents, exits,
+     * and whether the player has visited the Room.
+     */
     private void init() {
         contents = new ArrayList<Item>();
         exits = new ArrayList<Exit>();
         beenHere = false;
     }
-
+    
+    /**
+     * Gets the title of this Room.
+     * 
+     * @return The Room title.
+     */
     String getTitle() { return title; }
-
+    
+    /**
+     * Sets a new description for this Room.
+     * 
+     * @param desc the new description of the Room
+     */
     void setDesc(String desc) { this.desc = desc; }
-
-    /*
-     * Store the current (changeable) state of this room to the writer
-     * passed.
+    
+    /**
+     * Store the current (changeable) state of this room to the writer passed.
+     * 
+     * @param w received from the Dungeon storeState() method, this is the
+     * writer accessing '.sav' file being written to
+     * @throws IOException If something goes wrong with reading or writing the
+     * file.
      */
     void storeState(PrintWriter w) throws IOException {
         w.println(title + ":");
@@ -108,6 +152,15 @@ public class Room {
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
+    /**
+     * Restores the save conditions of each room, including their contents and
+     * whether the player has visited the Room.
+     * 
+     * @param s received from the Dungeon restoreState() method, this is the
+     * scanner accessing the '.sav' file being read from.
+     * @param d the dungeon associated with the '.sav' file
+     * @throws bork.GameState.IllegalSaveFormatException 
+     */
     void restoreState(Scanner s, Dungeon d) throws 
         GameState.IllegalSaveFormatException {
 
@@ -133,6 +186,12 @@ public class Room {
         }
     }
 
+    /**
+     * Gets the description of this Room if the player has not visited it yet as
+     * well as the contents and exits of this Room.
+     * 
+     * @return an appropriate description of the Room and its contents
+     */
     public String describe() {
         String description;
         if (beenHere) {
@@ -153,6 +212,14 @@ public class Room {
         return description;
     }
     
+    /**
+     * Gets the Room that the Player reaches when they travel through the Exit
+     * in the given direction, if there is an exit there.
+     * 
+     * @param dir the direction in which the player is trying to exit
+     * @return the Room that the Player reaches when they travel through the
+     * Exit in the given direction
+     */
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
@@ -162,18 +229,40 @@ public class Room {
         return null;
     }
 
+    /**
+     * Adds a new Exit to this Room.
+     * 
+     * @param exit an Exit to be added to the Room
+     */
     void addExit(Exit exit) {
         exits.add(exit);
     }
 
+    /**
+     * Adds an item to this room.
+     * 
+     * @param item the item to add
+     */
     void add(Item item) {
         contents.add(item);
     }
 
+    /**
+     * Removes an item from this room.
+     * 
+     * @param item the item to remove
+     */
     void remove(Item item) {
         contents.remove(item);
     }
 
+    /**
+     * Gets an item that goes by the given name from the contents of this Room.
+     * 
+     * @param name the name of the item to retrieve
+     * @return an item that goes by the given name from the contents of room
+     * @throws bork.Item.NoItemException If there are no more items in this Room.
+     */
     Item getItemNamed(String name) throws Item.NoItemException {
         for (Item item : contents) {
             if (item.goesBy(name)) {
@@ -183,6 +272,11 @@ public class Room {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Gets a list of all contents in this Room.
+     * 
+     * @return a list of all contents in this Room
+     */
     ArrayList<Item> getContents() {
         return contents;
     }
