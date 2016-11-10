@@ -182,7 +182,7 @@ public class Dungeon {
      * Restore the (changeable) state of this dungeon to that reflected in the
      * reader passed.
      * @param s the reader used to restore the dungeon
-     * @throws IllegalSaveFormatException if unable to read from the SAV file
+     * @throws GameState.IllegalSaveFormatException if unable to read from the SAV file
      */
     void restoreState(Scanner s) throws GameState.IllegalSaveFormatException {
 
