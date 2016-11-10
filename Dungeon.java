@@ -72,8 +72,8 @@ public class Dungeon {
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
      * @param filename the .bork file to hydrate from
-     * @throws a FileNotFoundException if the filename does not exist
-     * @throws an IllegalDungeonFormatException if the Dungeon can not be hydrated
+     * @throws FileNotFoundException if the filename does not exist
+     * @throws IllegalDungeonFormatException if the Dungeon can not be hydrated
      * due to incorrect format
      */
     public Dungeon(String filename) throws FileNotFoundException, 
@@ -87,8 +87,8 @@ public class Dungeon {
      * based on it, including (possibly) the items in their original locations.
      * @param filename the .bork file to hydrate from
      * @param initState boolean telling whether or not to initialize the Dungeon's statae
-     * @throws a FileNotFoundException if the filename does not exist
-     * @throws an IllegalDungeonFormatException if the Dungeon can not be hydrated
+     * @throws FileNotFoundException if the filename does not exist
+     * @throws IllegalDungeonFormatException if the Dungeon can not be hydrated
      * due to incorrect format
      */
     public Dungeon(String filename, boolean initState) 
@@ -246,6 +246,7 @@ public class Dungeon {
      * etc.
      * @param primaryItemName the name of the item to be returned
      * @return the corresponding item
+     * @throws bork.Item.NoItemException Signals that item does not exist
      */
     public Item getItem(String primaryItemName) throws Item.NoItemException {
         
