@@ -13,5 +13,5 @@ class ScoreCommand extends Command {
        * Returns the String of the players current score with a message about their ranking/level
        * @return String message with the score and ranking
        */
-      public String execute() {}
+      public String execute() {return "";}
 }

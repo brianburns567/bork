@@ -288,6 +288,7 @@ public class Room {
      * @return true or false if the room is lit or not
      */
     boolean isLit() {
+        return false;
     }
     
     /**
@@ -295,5 +296,6 @@ public class Room {
      * @return the list of NPCs in the Room
      */
     ArrayList<NPC> getNPCs() {
+        return this.npcList;
     }
 }

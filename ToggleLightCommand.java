@@ -21,5 +21,5 @@ class ToggleLightCommand extends Command {
        * Returns the String indicating the change in state of the light source
        * @return String the message reflecting the change or lack of change in the light sources state
        */
-       public String execute() {}
+       public String execute() {return "";}
 }

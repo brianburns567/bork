@@ -15,10 +15,12 @@ public class Weapon extends Item
      * Constructs a new Weapon Item, storing the inherent damage it deals.
      * 
      * @param s the Scanner that is reading the hydration file
+     * @throws bork.Item.NoItemException Signals that there is no Item left to create
+     * @throws bork.Dungeon.IllegalDungeonFormatException Signals that the format of the input file is incorrect
      */
-    public Weapon(Scanner s)
+    public Weapon(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException
     {
-        // code to come
+        super(s);
     }
     
     /**

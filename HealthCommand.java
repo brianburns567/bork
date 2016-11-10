@@ -13,5 +13,5 @@ class HealthCommand extends Command {
        * Returns the String based on the players current health
        * @return String the line expressing how healthy the player is
        */
-      public String execute() {}
+      public String execute() {return "";}
 }

@@ -19,7 +19,10 @@ public class LightSource extends Item {
        * @throws NoItemException Signals that there is no Item left to create
        * @throws Dungeon.IllegalDungeonFormatException Signals that the format of the input file is incorrect
        */
-      LightSource(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException {}
+      LightSource(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException
+      {
+          super(s);
+      }
       
       /**
        * Changes the state of the light source
@@ -30,11 +33,11 @@ public class LightSource extends Item {
        * Returns the amount of fuel left in the light source
        * @return int and int value of the number of turns/commands before the source is out of fuel
        */
-      public int getFuel() {}
+      public int getFuel() {return 0;}
       
       /**
        * Returns whether or not the source is currently lit
        * @return boolean the value of the state of the source
        */
-      public boolean isLit() {}
+      public boolean isLit() {return false;}
 }

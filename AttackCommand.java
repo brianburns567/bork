@@ -21,5 +21,5 @@ class AttackCommand extends Command {
        * Returns the String based on the calculated combat exchange 
        * @return String with lines of combat and messages about the round
        */
-      public String execute() {}
+      public String execute() {return "";}
 }
