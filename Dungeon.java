@@ -254,4 +254,11 @@ public class Dungeon {
         }
         return items.get(primaryItemName);
     }
+    
+    /**
+     * Removes an item from the dungeon's hashtable.
+     * @param itemName the name of the item to remove
+     */
+    void removeItem(String itemName) {
+    }
 }

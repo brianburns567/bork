@@ -20,6 +20,8 @@ public class Room {
     private String title;
     private String desc;
     private boolean beenHere;
+    private boolean isLit;
+    private ArrayList<NPC> npcList;
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
 
@@ -279,5 +281,19 @@ public class Room {
      */
     ArrayList<Item> getContents() {
         return contents;
+    }
+    
+    /**
+     * Getter method for isLit.
+     * @return true or false if the room is lit or not
+     */
+    boolean isLit() {
+    }
+    
+    /**
+     * Getter method for npcList.
+     * @return the list of NPCs in the Room
+     */
+    ArrayList<NPC> getNPCs() {
     }
 }
