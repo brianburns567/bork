@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
+ * Constructs new NPC's and holds the means to change their state.
  * 
  * @author Christopher Ringham
  */
