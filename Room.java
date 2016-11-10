@@ -161,7 +161,7 @@ public class Room {
      * @param s received from the Dungeon restoreState() method, this is the
      * scanner accessing the '.sav' file being read from.
      * @param d the dungeon associated with the '.sav' file
-     * @throws GameState.IllegalSaveFormatException 
+     * @throws GameState.IllegalSaveFormatException Signals an illegal format for the save file
      */
     void restoreState(Scanner s, Dungeon d) throws 
         GameState.IllegalSaveFormatException {
