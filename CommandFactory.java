@@ -15,6 +15,7 @@ public class CommandFactory {
     private static CommandFactory theInstance;
     public static List<String> MOVEMENT_COMMANDS = 
         Arrays.asList("n","w","e","s","u","d" );
+    public static List<String> LIGHT_COMMANDS;
     
     /**
      * A method that creates a CommandFactory instance or gets the instance if 

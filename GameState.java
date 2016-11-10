@@ -36,6 +36,8 @@ public class GameState {
     private Dungeon dungeon;
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
+    private int health;
+    private int score;
 
     /**
      * Creates a new gamestate and returns it or returns the gamestate if one already exists
@@ -232,5 +234,53 @@ public class GameState {
     Dungeon getDungeon() {
         return dungeon;
     }
+    
+    /**
+     * Decreases the adventurer's health as the result of some event.
+     * @param damage the amount to decrease health
+     */
+    void wound(int damage) {
+    }
+    
+    /**
+     * Increases the adventurer's score as the result of some event or achievement.
+     * @param score the amount to add to the score
+     */
+    void addScore(int score){
+    }
 
+    /**
+     * Ends the game as the result of the death of the adventurer.
+     */
+    void die() {
+    }
+    
+    /**
+     * Ends the game as the result of the adventurer winning.
+     */
+    void win() {
+    }
+    
+    /**
+     * Removes an item from the dungeon as the result of some event.
+     * @param itemName the name of the item that has disappeared
+     */
+    void disappear(String itemName) {
+    }
+    
+    /**
+     * Teleports the adventurer to a different room in the dungeon as the result
+     * of some event.
+     */
+    void teleport() {
+    }
+    
+    /**
+     * Transforms an item in the dungeon to a different item as the result of
+     * some event.
+     * @param oldItemName the name of the old item
+     * @param newItemName the name of the new item
+     */
+    void transform(String oldItemName, String newItemName) {
+    }
 }
