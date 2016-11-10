@@ -4,6 +4,10 @@ package bork;
 import java.util.Scanner;
 import java.util.Hashtable;
 
+/**
+ * Class that contains all the information about an Item object
+ * @author Dr. Zeitz
+ */
 public class Item {
 
     static class NoItemException extends Exception {}
@@ -11,8 +15,13 @@ public class Item {
     private String primaryName;
     private int weight;
     private Hashtable<String,String> messages;
-
-
+    
+    /**
+     * Constructor for Item objects reads in from the input scanner for the values of each Item
+     * @param s scanner object for initializing the items in the dungeon
+     * @throws NoItemException Signals that there is no Item left to create
+     * @throws Dungeon.IllegalDungeonFormatException Signals that the format of the input file being read is incorrect
+     */
     Item(Scanner s) throws NoItemException,
         Dungeon.IllegalDungeonFormatException {
 
@@ -41,17 +50,35 @@ public class Item {
         }
     }
 
+    /**
+     * Return true if the item's primary name equals the input string
+     * @param name string name of an item
+     * @return boolean returns whether the item's primary name is equal to the input or not
+     */
     boolean goesBy(String name) {
         // could have other aliases
         return this.primaryName.equals(name);
     }
 
+    /**
+     * Returns the primary name of the item
+     * @return String the primary name of the item
+     */
     String getPrimaryName() { return primaryName; }
 
+    /**
+     * Returns the String message associated with the input parameter's verb
+     * @param verb String for a verb referencing the hashtable of the item's messages
+     * @return String the message associated with the verb if there is one
+     */
     public String getMessageForVerb(String verb) {
         return messages.get(verb);
     }
 
+    /**
+     * Returns the string of the primary name
+     * @return String the primary name of the item
+     */
     public String toString() {
         return primaryName;
     }
