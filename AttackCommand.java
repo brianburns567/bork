@@ -11,9 +11,9 @@ class AttackCommand extends Command {
       private NPC target;
       
       /**
-       * Constructor for the weapon the player uses and the targer of the attack
+       * Constructor for the weapon the player uses and the target of the attack
        * @param weaponName the name of the weapon the player is attacking with
-       * @param targerName the name of the target the player is attacking
+       * @param targetName the name of the target the player is attacking
        */
       AttackCommand(String weaponName, String targetName) {}
       

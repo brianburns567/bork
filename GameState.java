@@ -230,6 +230,8 @@ public class GameState {
 
     /**
      * Returns the dungeon that is being used by GameState
+     * 
+     * @return the dungeon being played
      */
     Dungeon getDungeon() {
         return dungeon;
