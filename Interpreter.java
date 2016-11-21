@@ -52,7 +52,7 @@ public class Interpreter {
             while (!command.equals("q")) {
 
                 System.out.print(
-                    CommandFactory.instance().parse(command).execute());
+                    CommandFactory.instance().parse(command).execute() + "\n");
 
                 command = promptUser(commandLine);
             }
