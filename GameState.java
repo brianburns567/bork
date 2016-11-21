@@ -273,7 +273,11 @@ public class GameState {
     /**
      * Ends the game as the result of the adventurer winning.
      */
-    void win() {
+    void win()
+    {
+        System.out.println("Your lengthy toils have finally paid off...\n"
+                + "Congratulations! You've won Bork with a score of " + GameState.instance().getScore());
+        System.exit(0);
     }
     
     /**
@@ -296,7 +300,12 @@ public class GameState {
      * Teleports the adventurer to a different room in the dungeon as the result
      * of some event.
      */
-    void teleport() {
+    void teleport()
+    {
+        int randomRoomIndexNumber = (int) (this.dungeon.getRooms().size() * Math.random()); // Generates an integer from 0 to the number of total rooms in the dungeon -1
+        ArrayList<Room> rooms = new ArrayList<Room>(this.dungeon.getRooms().values()); // Convert the Hashtable  of all the Rooms in the dungeon to an ArrayList
+        Room randomRoom = rooms.get(randomRoomIndexNumber); // fetch the Room with the index that equals the random number that was generated
+        GameState.instance().setAdventurersCurrentRoom(randomRoom); // update the player's current Room
     }
     
     /**
@@ -305,7 +314,15 @@ public class GameState {
      * @param oldItemName the name of the old item
      * @param newItemName the name of the new item
      */
-    void transform(String oldItemName, String newItemName) {
+    void transform(String oldItemName, String newItemName)
+    {
+        try
+        {
+            GameState.instance().addToInventory(this.dungeon.getItem(newItemName));
+            GameState.instance().disappear(oldItemName);
+        } catch (Item.NoItemException ex) {
+            
+        }
     }
     
     int getScore(){
