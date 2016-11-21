@@ -43,10 +43,11 @@ public class Item {
                 throw new Dungeon.IllegalDungeonFormatException("No '" +
                     Dungeon.SECOND_LEVEL_DELIM + "' after item.");
             }
-            if(verbLine.contains("["){
-                String[] verbParts = verbLine.split("[");
+            String[] verbParts;
+            if(verbLine.contains("[")){
+                verbParts = verbLine.split("[");
             }else{
-                String[] verbParts = verbLine.split(":");
+                verbParts = verbLine.split(":");
             }
             messages.put(verbParts[0],verbParts[1]);
             
