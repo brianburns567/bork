@@ -263,4 +263,10 @@ public class Dungeon {
     void removeItem(String itemName) {
         this.items.remove(itemName);
     }
+    
+    Hashtable<String,Room> getRooms()
+    {
+        return this.rooms;
+    }
+    
 }
