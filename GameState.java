@@ -282,8 +282,14 @@ public class GameState {
      */
     void disappear(String itemName) {
         dungeon.removeItem(itemName);
-        removeFromInventory(getItemFromInventoryNamed(itemName));
-        getAdvnturersCurrentRoom.removeItem(getItem(itemName));
+        try{
+            removeFromInventory(getItemFromInventoryNamed(itemName));
+        } catch(NoItemException e){
+        }
+        try{
+            getAdvnturersCurrentRoom.removeItem(getItem(itemName));
+        } catch(NoItemException e){
+        }
     }
     
     /**
