@@ -31,6 +31,8 @@ public class GameState {
     static String ADVENTURER_MARKER = "Adventurer:";
     static String CURRENT_ROOM_LEADER = "Current room: ";
     static String INVENTORY_LEADER = "Inventory: ";
+    static String CURRENT_HEALTH_LEADER = "Health: ";
+    static String CURRENT_SCORE_LEADER = "Score: ";
     static int WIN_SCORE = 100;
 
     private static GameState theInstance;
@@ -105,6 +107,11 @@ public class GameState {
                 }
             }
         }
+        String currentHealthString = (s.nextLine().substring(CURRENT_HEALTH_LEADER.length()));
+        this.health = Integer.valueOf(currentHealthString);
+        
+        String currentScoreString = (s.nextLine().substring(CURRENT_SCORE_LEADER.length()));
+        this.score = Integer.valueOf(currentScoreString);
     }
 
     /**
@@ -134,6 +141,8 @@ public class GameState {
             }
             w.println(inventory.get(inventory.size()-1).getPrimaryName());
         }
+        w.println("Health: " + this.health);
+        w.println("Score: " + this.score);
         w.close();
     }
 
