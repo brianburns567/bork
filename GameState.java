@@ -31,6 +31,7 @@ public class GameState {
     static String ADVENTURER_MARKER = "Adventurer:";
     static String CURRENT_ROOM_LEADER = "Current room: ";
     static String INVENTORY_LEADER = "Inventory: ";
+    static int WIN_SCORE = 100;
 
     private static GameState theInstance;
     private Dungeon dungeon;
@@ -242,6 +243,10 @@ public class GameState {
      * @param damage the amount to decrease health
      */
     void wound(int damage) {
+        this.health -= damage;
+        if(this.health <= 0){
+            die();
+        }
     }
     
     /**
@@ -249,12 +254,20 @@ public class GameState {
      * @param score the amount to add to the score
      */
     void addScore(int score){
+        this.score += score;
+        if(this.score >= WIN_SCORE){
+            win();
+        }
     }
 
     /**
      * Ends the game as the result of the death of the adventurer.
      */
     void die() {
+        this.health = 0;
+        System.out.print("OH NO! You have died!");
+        System.out.print("Your score is " + getScore() + ".");
+        System.exit(0);
     }
     
     /**
@@ -272,6 +285,15 @@ public class GameState {
      * @param itemName the name of the item that has disappeared
      */
     void disappear(String itemName) {
+        dungeon.removeItem(itemName);
+        try{
+            removeFromInventory(getItemFromInventoryNamed(itemName));
+        } catch(NoItemException e){
+        }
+        try{
+            getAdvnturersCurrentRoom.removeItem(getItem(itemName));
+        } catch(NoItemException e){
+        }
     }
     
     /**
@@ -301,5 +323,13 @@ public class GameState {
         } catch (Item.NoItemException ex) {
             
         }
+    }
+    
+    int getScore(){
+        return this.score;
+    }
+    
+    int getHealth(){
+        return this.health;
     }
 }
