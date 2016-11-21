@@ -59,6 +59,12 @@ public class CommandFactory {
         if (MOVEMENT_COMMANDS.contains(verb)) {
             return new MovementCommand(verb);
         }
+        if (verb.equals("health")) {
+            return new HealthCommand();
+        }
+        if (verb.equals("score")) {
+            return new ScoreCommand();
+        }
         if (parts.length == 2) {
             return new ItemSpecificCommand(verb, noun);
         }

@@ -56,6 +56,8 @@ public class GameState {
      */
     private GameState() {
         inventory = new ArrayList<Item>();
+        health = 100;
+        score = 0;
     }
 
     /**
