@@ -3,7 +3,6 @@ package bork;
 
 /**
  * Handles commands to view the players current score
- * @author Woodruff
  */
 class ScoreCommand extends Command {
 
