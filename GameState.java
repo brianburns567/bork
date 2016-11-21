@@ -308,7 +308,7 @@ public class GameState {
         ArrayList<Room> rooms = new ArrayList<Room>(this.dungeon.getRooms().values()); // Convert the Hashtable  of all the Rooms in the dungeon to an ArrayList
         Room randomRoom = rooms.get(randomRoomIndexNumber); // fetch the Room with the index that equals the random number that was generated
         GameState.instance().setAdventurersCurrentRoom(randomRoom); // update the player's current Room
-        GameState.instance().getAdventurersCurrentRoom().describe();
+        System.out.println(GameState.instance().getAdventurersCurrentRoom().describe());
     }
     
     /**
