@@ -3,7 +3,7 @@ package bork;
 
 /**
  * Handles the command to view the user's current health.
- * @author Woodruff
+ * @author Woodruff and Brian E. Burns
  */
 class HealthCommand extends Command {
 
