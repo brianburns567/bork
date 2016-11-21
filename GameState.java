@@ -288,11 +288,11 @@ public class GameState {
         dungeon.removeItem(itemName);
         try{
             removeFromInventory(getItemFromInventoryNamed(itemName));
-        } catch(NoItemException e){
+        } catch(Item.NoItemException e){
         }
         try{
-            getAdvnturersCurrentRoom.removeItem(getItem(itemName));
-        } catch(NoItemException e){
+            GameState.instance().getAdventurersCurrentRoom().remove(this.dungeon.getItem(itemName));
+        } catch(Item.NoItemException e){
         }
     }
     

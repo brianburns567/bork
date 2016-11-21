@@ -84,6 +84,7 @@ public class Item {
      * Returns the string of the primary name
      * @return String the primary name of the item
      */
+    @Override
     public String toString() {
         return primaryName;
     }
