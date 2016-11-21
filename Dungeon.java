@@ -261,5 +261,6 @@ public class Dungeon {
      * @param itemName the name of the item to remove
      */
     void removeItem(String itemName) {
+        this.items.remove(itemName);
     }
 }
