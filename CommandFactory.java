@@ -65,6 +65,10 @@ public class CommandFactory {
         if (verb.equals("score")) {
             return new ScoreCommand();
         }
+        if (verb.equals("attack") && command.contains("with") && (parts.length == 4))
+        {
+            return new AttackCommand(parts[3], parts[1]);
+        }
         if (parts.length == 2) {
             return new ItemSpecificCommand(verb, noun);
         }
