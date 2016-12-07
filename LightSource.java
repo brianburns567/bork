@@ -13,6 +13,8 @@ public class LightSource extends Item {
       private boolean isLit;
       private int fuel;
       
+      static class NoActiveLightSourceException extends Exception {}
+      
       /**
        * Constructor for LightSources reads in from input scanner for values
        * @param s scanner object for the initialization of the light source
