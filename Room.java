@@ -21,7 +21,7 @@ public class Room {
     private String title;
     private String desc;
     private boolean beenHere;
-    private boolean isLit;
+    private boolean isLit = true;
     private ArrayList<NPC> npcList;
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
@@ -217,7 +217,7 @@ public class Room {
      * @return an appropriate description of the Room and its contents
      */
     public String describe() {
-        if(GameState.instance().getAdventurersCurrentRoom().isLit() || GameState.instance().hasActiveLightSource())
+        if(this.isLit || GameState.instance().hasActiveLightSource())
         {
             String description;
             if (beenHere) {
