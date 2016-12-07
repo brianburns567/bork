@@ -43,6 +43,7 @@ public class Dungeon {
     public static String EXITS_MARKER = "Exits:";
     public static String ITEMS_MARKER = "Items:";
     public static String WEAPONS_MARKER = "Weapons:";
+    public static String LIGHTS_MARKER = "Lights:";
     
     // Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
@@ -121,9 +122,40 @@ public class Dungeon {
                 add(new Item(s));
             }
         } catch (Item.NoItemException e) {  /* end of items */ }
+        
+        String verbLine = s.nextLine();
+        if (verbLine.equals(WEAPONS_MARKER)) {
+            try {
+                // Instantiate weapons.
+                while (true) {
+                    add(new Weapon(s));
+                }
+            } catch (Item.NoItemException e) {  /* end of weapons */ }
+            verbLine = s.nextLine();
+        }
+        
+        else if (verbLine.equals(LIGHTS_MARKER)) {
+            try {
+                // Instantiate light sources.
+                while (true) {
+                    add(new LightSource(s));
+                }
+            } catch (Item.NoItemException e) {  /* end of lights */ }
+            verbLine = s.nextLine();
+        }
+        
+        if (verbLine.equals(LIGHTS_MARKER)) {
+            try {
+                // Instantiate light sources.
+                while (true) {
+                    add(new LightSource(s));
+                }
+            } catch (Item.NoItemException e) {  /* end of lights */ }
+            verbLine = s.nextLine();
+        }
 
         // Throw away Rooms starter.
-        if (!s.nextLine().equals(ROOMS_MARKER)) {
+        if (!verbLine.equals(ROOMS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" +
                 ROOMS_MARKER + "' line where expected.");
         }
@@ -151,19 +183,6 @@ public class Dungeon {
                 Exit exit = new Exit(s, this);
             }
         } catch (Exit.NoExitException e) {  /* end of exits */ }
-        
-        // Throw away Weapons starter.
-        if (!s.nextLine().equals(WEAPONS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                WEAPONS_MARKER + "' line where expected.");
-        }
-        
-        try {
-            // Instantiate weapons.
-            while (true) {
-                add(new Weapon(s));
-            }
-        } catch (Item.NoItemException e) {  /* end of weapons */ }
 
         s.close();
     }
