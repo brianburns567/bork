@@ -85,7 +85,22 @@ public class NPC
      */
     public void wound(int damage)
     {
-        
+        this.health -= damage;
+        if(this.health <= 0) {
+            die();
+        }
+    }
+    
+    /**
+     * Kills a NPC and removes them from the dungeon
+     */
+    void die(){
+        for(Item item : inventory){
+            remove(item);
+            getCurrentRoom.add(item);
+        }
+        getCurrentRoom.removeNPC(this);
+        GameState.instance().getDungeon().removeNPC(this);
     }
     
     /**
@@ -95,7 +110,7 @@ public class NPC
      */
     public void add(Item item)
     {
-        // code to come
+        inventory.add(item);
     }
     
     /**
@@ -105,7 +120,7 @@ public class NPC
      */
     public void remove(Item item)
     {
-        // code to come
+        inventory.remove(item);
     }
     
 }
