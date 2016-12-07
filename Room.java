@@ -16,6 +16,7 @@ public class Room {
     class NoRoomException extends Exception {}
 
     static String CONTENTS_STARTER = "Contents: ";
+    static String NPC_STARTER = "NPCs: ";
 
     private String title;
     private String desc;
@@ -151,6 +152,13 @@ public class Room {
             }
             w.println(contents.get(contents.size()-1).getPrimaryName());
         }
+        if (npcList.size() > 0) {
+            w.print(NPC_STARTER);
+            for (int i = 0; i < npcList.size() - 1; i++) {
+                w.print(npcList.get(i).getName() + " " + npcList.get(i).getHealth() + ",");
+            }
+            w.print(npcList.get(npcList.size() - 1).getName() + " " + npcList.get(npcList.size() - 1).getHealth());
+        }
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
@@ -184,8 +192,25 @@ public class Room {
                         "No such item '" + itemName + "'");
                 }
             }
-            s.nextLine();  // Consume "---".
         }
+        line = s.nextLine();
+        if (line.startsWith(NPC_STARTER)) {
+            String npcLine = line.substring(NPC_STARTER.length());
+            String[] npcHealths = npcLine.split(",");
+            for (String npcHealth : npcHealths) {
+                String[] nH = npcHealth.split(" ");
+                try {
+                    for (NPC npc : npcList) {
+                        if (npc.getName().equals(nH[0])) {
+                            npc.setHealth(Integer.parseInt(nH[1]));
+                        }
+                    }
+                } catch (NPC.NoNPCException e) {
+                    throw new GameState.IllegalSaveFormatException("No such NPC '" + ng[0] + "'");
+                }
+            }
+        }   
+        s.nextLine();  // Consume "---".
     }
 
     /**
