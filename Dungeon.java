@@ -184,7 +184,7 @@ public class Dungeon {
                 Exit exit = new Exit(s, this);
             }
         } catch (Exit.NoExitException e) {  /* end of exits */ }
-
+        
         s.close();
     }
     
