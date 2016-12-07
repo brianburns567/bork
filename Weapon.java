@@ -11,6 +11,8 @@ public class Weapon extends Item
 {
     private int damage;
     
+    static class NoWeaponException extends Exception {}
+    
     /**
      * Constructs a new Weapon Item, storing the inherent damage it deals.
      * 

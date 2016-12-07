@@ -46,13 +46,25 @@ class AttackCommand extends Command {
 
             //NPC attack phase
             int NPCScore = targetNPC.getScore();
-            weaponDamage = targetNPC.getWeaponFromInventory();
+            weaponDamage = targetNPC.getWeapon().getDamage();
             GameState.instance().wound(weaponDamage+(NPCScore/2));
             
           } catch (Item.NoItemException ex) {
               return "You do not have the " + this.weaponName + " to attack with.";
           } catch (NPC.NoNpcException e) {
               return this.targetName + "is not in the room.";
+          } catch (Weapon.NoWeaponException x)
+          {
+              try
+              {
+                NPC targetNPC = GameState.instance().getNpcInVicinityNamed(targetName);
+                GameState.instance().wound(1+(targetNPC.getScore()/2));
+              
+              } catch (NPC.NoNpcException e) {
+              return this.targetName + "is not in the room.";
+              
+              }
+              
           }
           
           return "You exchange blows!";
