@@ -53,6 +53,7 @@ public class Dungeon {
     private Room entry;
     private Hashtable<String,Room> rooms;
     private Hashtable<String,Item> items;
+    private Hashtable<String,NPC> npcs;
     private String filename;
     
     /**
@@ -194,6 +195,7 @@ public class Dungeon {
     private void init() {
         rooms = new Hashtable<String,Room>();
         items = new Hashtable<String,Item>();
+        npcs = new Hashtable<String,NPC>();
     }
 
     /**
@@ -265,6 +267,12 @@ public class Dungeon {
     public void add(Item item) { items.put(item.getPrimaryName(),item); }
     
     /**
+     * Adds an npc to the Dungeon's hashtable.
+     * @param npc the NPC to be added
+     */
+    public void add(NPC npc) { npcs.put(npc.getName(),npc); }
+    
+    /**
      * Finds a room in the hashtable by name.
      * @param roomTitle the name of the room to be returned
      * @return the corresponding room
@@ -297,9 +305,17 @@ public class Dungeon {
         this.items.remove(itemName);
     }
     
+    /**
+     * Removes an NPC from the dungeon's hashtable.
+     * @param npcName the name of the NPC to remove
+     */
+    void removeNPC(String npcName) {
+        this.npcs.remove(npcName);
+    }
+    
     Hashtable<String,Room> getRooms()
     {
         return this.rooms;
     }
-    
+        
 }
