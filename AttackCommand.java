@@ -32,7 +32,13 @@ class AttackCommand extends Command {
           {
             //Player attack phase
             int playerScore = GameState.instance().getScore();
-            int weaponDamage = GameState.instance().getItemFromInventoryNamed(weaponName).getDamage();
+            Item wepReferredTo = GameState.instance().getItemFromInventoryNamed(weaponName);
+            if(wepReferredTo instanceof Weapon)
+            {
+                int weaponDamage = GameState.instance().getItemFromInventoryNamed(weaponName).getDamage();
+            } else {
+                int weaponDamage = 1;
+            }
             NPC targetNPC = GameState.instance().getNPCInVicinity();
             targetNPC.wound(weaponDamage+(playerScore/2));
 
