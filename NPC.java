@@ -70,6 +70,19 @@ public class NPC
         return this.score;
     }
     
+    public Weapon getWeapon() throws Weapon.NoWeaponException
+    {
+        for(Item item : this.inventory)
+        {
+            if(item instanceof Weapon)
+            {
+                return (Weapon)item;
+            }
+        }
+        
+        throw new Weapon.NoWeaponException();
+    }
+    
     /**
      * Gets the Room this NPC is currently in.
      * 
