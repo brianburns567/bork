@@ -41,6 +41,11 @@ public class CommandFactory {
      * @return a new Command object of the correct type
      */
     public Command parse(String command) {
+        try {
+            GameState.instance().reduceFuelOfActiveLightSources();
+            
+        } catch (LightSource.NoActiveLightSourceException ex) {}
+        
         String parts[] = command.split(" ");
         String verb = parts[0];
         String noun = parts.length >= 2 ? parts[1] : "";

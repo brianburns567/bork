@@ -137,6 +137,11 @@ public class NPC
         return this.currentRoom;
     }
     
+    public void setHealth(int health)
+    {
+        this.health = health;
+    }
+    
     /**
      * Takes hit points away from this NPC's health.
      * 

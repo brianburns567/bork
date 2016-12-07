@@ -183,6 +183,40 @@ public class GameState {
         inventory.remove(item);
     }
     
+    boolean hasActiveLightSource()
+    {
+        for(Item item : this.inventory)
+        {
+            if(item instanceof LightSource)
+            {
+                LightSource lightSource = (LightSource)item;
+                if(lightSource.isLit())
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    void reduceFuelOfActiveLightSources() throws LightSource.NoActiveLightSourceException
+    {
+        for(Item item : this.inventory)
+        {
+            if(item instanceof LightSource)
+            {
+                LightSource lightSource = (LightSource)item;
+                if(lightSource.isLit())
+                {
+                    lightSource.reduceFuel();
+                }
+            }
+        }
+        
+        throw new LightSource.NoActiveLightSourceException();
+    }
+    
     NPC getNpcInVicinityNamed(String npcName) throws NPC.NoNpcException
     {
         for (NPC npc : this.adventurersCurrentRoom.getNPCs())
