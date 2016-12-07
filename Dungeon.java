@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 
 /**
  * A class the represents the Dungeon being played by the user. It holds a collection
@@ -186,18 +187,22 @@ public class Dungeon {
             }
         } catch (Exit.NoExitException e) {  /* end of exits */ }
         
-        if (!s.nextLine().equals(NPCS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" + 
-                    NPCS_MARKER + "' line where expected.");
+        try {
+            if (!s.nextLine().equals(NPCS_MARKER)) {
+                throw new IllegalDungeonFormatException("No '" + 
+                        NPCS_MARKER + "' line where expected.");
+            }
+            
+            try {
+                // Instantiate npcs.
+                while (true) {
+                    NPC npc = new NPC(s);
+                }
+            }   
+            catch (NPC.NoNpcException e) {  /* end of npcs */ }
         }
         
-        try {
-            // Instantiate npcs.
-            while (true) {
-                NPC npc = new NPC(s);
-            }
-        }
-        catch (NPC.NoNpcException e) {  /* end of npcs */ }
+        catch (NoSuchElementException e) { /* end of file */ }
         
         s.close();
     }
