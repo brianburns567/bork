@@ -36,7 +36,7 @@ public class NPC
      * @throws bork.NPC.NoNPCException
      * @throws bork.Dungeon.IllegalDungeonFormatException
      */
-    public NPC(Scanner s
+    public NPC(Scanner s, Dungeon d
     ) throws NoNpcException, Dungeon.IllegalDungeonFormatException
     {
         inventory = new ArrayList<Item>();
@@ -48,7 +48,8 @@ public class NPC
         }
         
         score = Integer.valueOf(s.nextLine());
-        currentRoom = GameState.instance().getDungeon().getRoom(s.nextLine());
+        currentRoom = d.getRoom(s.nextLine());
+        currentRoom.addNPC(this);
         
         String lineOfDesc = s.nextLine();
         while (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM) &&
@@ -59,7 +60,7 @@ public class NPC
                 String[] itemNames = itemsList.split(",");
                 for (String itemName : itemNames) {
                     try {
-                        add(GameState.instance().getDungeon().getItem(itemName));
+                        add(d.getItem(itemName));
                     }
                     catch (Item.NoItemException e) {
                         throw new Dungeon.IllegalDungeonFormatException(

@@ -196,7 +196,7 @@ public class Dungeon {
             try {
                 // Instantiate npcs.
                 while (true) {
-                    NPC npc = new NPC(s);
+                    NPC npc = new NPC(s, this);
                 }
             }   
             catch (NPC.NoNpcException e) {  /* end of npcs */ }
