@@ -183,7 +183,7 @@ public class GameState {
         inventory.remove(item);
     }
     
-    NPC getNpcInVicinityNamed(String npcName)
+    NPC getNpcInVicinityNamed(String npcName) throws NPC.NoNpcException
     {
         for (NPC npc : this.adventurersCurrentRoom.getNPCs())
         {

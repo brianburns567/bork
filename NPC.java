@@ -17,6 +17,8 @@ public class NPC
     private Room currentRoom;
     private ArrayList<Item> inventory;
     
+    static class NoNpcException extends Exception {}
+    
     /**
      * Constructs an NPC with a name, description, health, score, and current
      * room from the file attached to the given Scanner.
@@ -97,9 +99,9 @@ public class NPC
     void die(){
         for(Item item : inventory){
             remove(item);
-            getCurrentRoom.add(item);
+            this.currentRoom.add(item);
         }
-        getCurrentRoom.removeNPC(this);
+        this.currentRoom.removeNPC(this);
         GameState.instance().getDungeon().removeNPC(this);
     }
     
