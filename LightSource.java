@@ -22,22 +22,44 @@ public class LightSource extends Item {
       LightSource(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException
       {
           super(s);
+          fuel = Integer.valueOf(s.nextLine());
+          isLit = false;
+          
+          if (!s.nextLine().equals(Dungeon.SECOND_LEVEL_DELIM)) 
+            throw new Dungeon.IllegalDungeonFormatException("No '" +
+                    Dungeon.SECOND_LEVEL_DELIM + "' after light source.");
       }
       
       /**
        * Changes the state of the light source
        */
-      public void toggleLight() {}
+      public void toggleLight() {
+          if (isLit)
+              isLit = false;
+          else
+              isLit = true;
+      }
       
       /**
        * Returns the amount of fuel left in the light source
        * @return int and int value of the number of turns/commands before the source is out of fuel
        */
-      public int getFuel() {return 0;}
+      public int getFuel() {
+          return fuel;
+      }
       
       /**
        * Returns whether or not the source is currently lit
        * @return boolean the value of the state of the source
        */
-      public boolean isLit() {return false;}
+      public boolean isLit() {
+          return isLit;
+      }
+      
+      /**
+       * Decrements the remaining fuel in the light source.
+       */
+      public void reduceFuel() {
+          fuel--;
+      }
 }
