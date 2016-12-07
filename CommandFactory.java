@@ -80,6 +80,10 @@ public class CommandFactory {
         if (parts.length == 2) {
             return new ItemSpecificCommand(verb, noun);
         }
+        if (verb.equals("look"))
+        {
+            return new LookCommand();
+        }
         return new UnknownCommand(command);
     }
 }

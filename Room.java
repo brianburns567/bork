@@ -241,6 +241,27 @@ public class Room {
         }
     }
     
+    public String lookDescribe()
+    {
+        if(this.isLit || GameState.instance().hasActiveLightSource())
+        {
+            String description;
+            description = title + "\n" + desc;
+            for (Item item : contents) {
+                    description += "\nThere is a " + item.getPrimaryName() + " here.";
+                }
+            if (contents.size() > 0) { description += "\n"; }
+            for (Exit exit : exits) {
+                        description += "\n" + exit.describe();
+                    }
+            return description;
+            
+        } else {
+            return "It is too dark to see in here!";
+        }
+        
+    }
+    
     /**
      * Gets the Room that the Player reaches when they travel through the Exit
      * in the given direction, if there is an exit there.
