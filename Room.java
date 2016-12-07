@@ -248,7 +248,7 @@ public class Room {
     void add(Item item) {
         contents.add(item);
     }
-
+    
     /**
      * Removes an item from this room.
      * 
@@ -256,6 +256,22 @@ public class Room {
      */
     void remove(Item item) {
         contents.remove(item);
+    }
+    
+    /**
+     * Adds a new NPC to this Room
+     * @param npc an NPC to be added to the Room
+     */
+    void addNPC(NPC npc) {
+        npcList.add(npc);
+    }
+    
+    /**
+     * Removes an NPC from this room.
+     * @param npc an NPC to be removed from the Room
+     */
+    void removeNPC(NPC npc) {
+        npcList.remove(npc);
     }
 
     /**
