@@ -115,7 +115,7 @@ public class NPC
             this.currentRoom.add(item);
         }
         this.currentRoom.removeNPC(this);
-        GameState.instance().getDungeon().removeNPC(this);
+        GameState.instance().getDungeon().removeNPC(this.name);
     }
     
     /**
