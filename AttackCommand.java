@@ -67,7 +67,7 @@ class AttackCommand extends Command {
               
           }
           
-          return "You exchange blows!";
+          return "You've exchanged blows!";
          
       }
 }
