@@ -228,7 +228,10 @@ public class Room {
             for (Item item : contents) {
                 description += "\nThere is a " + item.getPrimaryName() + " here.";
             }
-            if (contents.size() > 0) { description += "\n"; }
+            for (NPC npc : npcList) {
+                description += "\n" + desc;
+            }
+            if (npcList.size() > 0) { description += "\n"; }
             if (!beenHere) {
                 for (Exit exit : exits) {
                     description += "\n" + exit.describe();

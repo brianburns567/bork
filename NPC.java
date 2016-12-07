@@ -10,6 +10,16 @@ import java.util.Scanner;
  */
 public class NPC
 {
+    
+    /**
+     * A subclass of Exception that handles exceptions that result when looking 
+     * for an NPC in a bork file when there is none.
+     * @author Brian Burns
+     */
+    static class NoNpcException extends Exception {}
+    
+    static String INVENTORY_STARTER = "Inventory: ";
+    
     private String name;
     private String desc;
     private int health;
@@ -17,17 +27,51 @@ public class NPC
     private Room currentRoom;
     private ArrayList<Item> inventory;
     
-    static class NoNpcException extends Exception {}
     
     /**
      * Constructs an NPC with a name, description, health, score, and current
      * room from the file attached to the given Scanner.
      * 
      * @param s the Scanner reading the hydration file
+     * @throws bork.NPC.NoNPCException
+     * @throws bork.Dungeon.IllegalDungeonFormatException
      */
-    public NPC(Scanner s)
+    public NPC(Scanner s
+    ) throws NoNpcException, Dungeon.IllegalDungeonFormatException
     {
-        // code to come
+        inventory = new ArrayList<Item>();
+        health = 0;
+        
+        name = s.nextLine();
+        if (name.equals(Dungeon.TOP_LEVEL_DELIM)) {
+            throw new NoNpcException();
+        }
+        
+        score = Integer.valueOf(s.nextLine());
+        currentRoom = GameState.instance().getDungeon().getRoom(s.nextLine());
+        
+        String lineOfDesc = s.nextLine();
+        while (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM) &&
+               !lineOfDesc.equals(Dungeon.TOP_LEVEL_DELIM)) {
+            
+            if (lineOfDesc.startsWith(INVENTORY_STARTER)) {
+                String itemsList = lineOfDesc.substring(INVENTORY_STARTER.length());
+                String[] itemNames = itemsList.split(",");
+                for (String itemName : itemNames) {
+                    try {
+                        add(GameState.instance().getDungeon().getItem(itemName));
+                    }
+                    catch (Item.NoItemException e) {
+                        throw new Dungeon.IllegalDungeonFormatException(
+                            "No such item '" + itemName + "'");
+                    }
+                }
+            }
+            else {
+                desc += lineOfDesc + "\n";
+            }
+            lineOfDesc = s.nextLine();
+        }
     }
     
     /**
