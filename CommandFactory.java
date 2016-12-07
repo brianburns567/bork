@@ -15,7 +15,7 @@ public class CommandFactory {
     private static CommandFactory theInstance;
     public static List<String> MOVEMENT_COMMANDS = 
         Arrays.asList("n","w","e","s","u","d" );
-    public static List<String> LIGHT_COMMANDS;
+    public static List<String> LIGHT_COMMANDS = Arrays.asList("on", "off");
     
     /**
      * A method that creates a CommandFactory instance or gets the instance if 
@@ -68,6 +68,9 @@ public class CommandFactory {
         if (verb.equals("attack") && command.contains("with") && (parts.length == 4))
         {
             return new AttackCommand(parts[3], parts[1]);
+        }
+        if (verb.equals("turn") && LIGHT_COMMANDS.contains(parts[2]) && (parts.length == 3)) {
+            return new ToggleLightCommand(parts[1], parts[2]);
         }
         if (parts.length == 2) {
             return new ItemSpecificCommand(verb, noun);
