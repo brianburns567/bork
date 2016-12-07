@@ -44,6 +44,7 @@ public class Dungeon {
     public static String ITEMS_MARKER = "Items:";
     public static String WEAPONS_MARKER = "Weapons:";
     public static String LIGHTS_MARKER = "Lights:";
+    public static String NPCS_MARKER = "NPCs:";
     
     // Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
@@ -184,6 +185,19 @@ public class Dungeon {
                 Exit exit = new Exit(s, this);
             }
         } catch (Exit.NoExitException e) {  /* end of exits */ }
+        
+        if (!s.nextLine().equals(NPCS_MARKER)) {
+            throw new IllegalDungeonFormatException("No '" + 
+                    NPCS_MARKER + "' line where expected.");
+        }
+        
+        try {
+            // Instantiate npcs.
+            while (true) {
+                NPC npc = new NPC(s);
+            }
+        }
+        catch (NPC.NoNpcException e) {  /* end of npcs */ }
         
         s.close();
     }
