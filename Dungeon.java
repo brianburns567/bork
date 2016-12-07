@@ -42,6 +42,7 @@ public class Dungeon {
     public static String ROOMS_MARKER = "Rooms:";
     public static String EXITS_MARKER = "Exits:";
     public static String ITEMS_MARKER = "Items:";
+    public static String WEAPONS_MARKER = "Weapons:";
     
     // Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
@@ -150,6 +151,19 @@ public class Dungeon {
                 Exit exit = new Exit(s, this);
             }
         } catch (Exit.NoExitException e) {  /* end of exits */ }
+        
+        // Throw away Weapons starter.
+        if (!s.nextLine().equals(WEAPONS_MARKER)) {
+            throw new IllegalDungeonFormatException("No '" +
+                WEAPONS_MARKER + "' line where expected.");
+        }
+        
+        try {
+            // Instantiate weapons.
+            while (true) {
+                add(new Weapon(s));
+            }
+        } catch (Item.NoItemException e) {  /* end of weapons */ }
 
         s.close();
     }

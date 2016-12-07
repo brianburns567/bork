@@ -21,6 +21,11 @@ public class Weapon extends Item
     public Weapon(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException
     {
         super(s);
+        damage = Integer.valueOf(s.nextLine());
+        
+        if (!s.nextLine().equals(Dungeon.SECOND_LEVEL_DELIM)) 
+            throw new Dungeon.IllegalDungeonFormatException("No '" +
+                    Dungeon.SECOND_LEVEL_DELIM + "' after weapon.");
     }
     
     /**
