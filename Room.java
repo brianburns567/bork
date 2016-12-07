@@ -250,10 +250,17 @@ public class Room {
         {
             String description;
             description = title + "\n" + desc;
+            //List & describe items
             for (Item item : contents) {
                     description += "\nThere is a " + item.getPrimaryName() + " here.";
                 }
             if (contents.size() > 0) { description += "\n"; }
+            //List & describe NPCs
+            for (NPC npc : npcList) {
+                description += "\n" + desc;
+            }
+            if (npcList.size() > 0) { description += "\n"; }
+            //List & describe exits
             for (Exit exit : exits) {
                         description += "\n" + exit.describe();
                     }

@@ -12,9 +12,9 @@ public class Item {
 
     static class NoItemException extends Exception {}
 
-    private String primaryName;
-    private int weight;
-    private Hashtable<String,String> messages;
+    protected String primaryName;
+    protected int weight;
+    protected Hashtable<String,String> messages;
     
     /**
      * Constructor for Item objects reads in from the input scanner for the values of each Item

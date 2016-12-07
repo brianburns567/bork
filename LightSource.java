@@ -64,8 +64,8 @@ public class LightSource extends Item {
       public void reduceFuel() {
           fuel--;
           if(fuel <= 0) {
-                toggleLigth();
-                System.out.println("The " + this.name + " has run out of fuel.");
+                toggleLight();
+                System.out.println("The " + super.primaryName + " has run out of fuel.");
           }
       }
 }
