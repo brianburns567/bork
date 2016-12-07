@@ -32,24 +32,26 @@ class AttackCommand extends Command {
           {
             //Player attack phase
             int playerScore = GameState.instance().getScore();
-            Item wepReferredTo = GameState.instance().getItemFromInventoryNamed(weaponName);
-            if(wepReferredTo instanceof Weapon)
+            int weaponDamage = 0;
+            Item itemReferredTo = GameState.instance().getItemFromInventoryNamed(weaponName);
+            if(itemReferredTo instanceof Weapon)
             {
-                int weaponDamage = GameState.instance().getItemFromInventoryNamed(weaponName).getDamage();
+                Weapon wepReferredTo = (Weapon)itemReferredTo;
+                weaponDamage = wepReferredTo.getDamage(); //if it is a weapon
             } else {
-                int weaponDamage = 1;
+                weaponDamage = 1; //if it is not a weapon
             }
-            NPC targetNPC = GameState.instance().getNPCInVicinity();
+            NPC targetNPC = GameState.instance().getNpcInVicinityNamed(targetName);
             targetNPC.wound(weaponDamage+(playerScore/2));
 
             //NPC attack phase
             int NPCScore = targetNPC.getScore();
-            int weaponDamage = targetNPC.getWeaponFromInventory();
+            weaponDamage = targetNPC.getWeaponFromInventory();
             GameState.instance().wound(weaponDamage+(NPCScore/2));
             
-          } catch (Weapon.NoWeaponException ex) {
+          } catch (Item.NoItemException ex) {
               return "You do not have the " + this.weaponName + " to attack with.";
-          } catch (NPC.NoNPCException e) {
+          } catch (NPC.NoNpcException e) {
               return this.targetName + "is not in the room.";
           }
           

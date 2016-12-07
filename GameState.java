@@ -182,6 +182,19 @@ public class GameState {
     void removeFromInventory(Item item) {
         inventory.remove(item);
     }
+    
+    NPC getNpcInVicinityNamed(String npcName)
+    {
+        for (NPC npc : this.adventurersCurrentRoom.getNPCs())
+        {
+            if(npc.getName().equals(npcName))
+            {
+                return npc;
+            }
+        }
+        
+        throw new NPC.NoNpcException();
+    }
 
     /**
      * Returns the item with the name from input if it is found in the current room or the player's inventory
