@@ -217,7 +217,7 @@ public class Room {
      * @return an appropriate description of the Room and its contents
      */
     public String describe() {
-        if(GameState.instance().getAdventurersCurrentRoom().isLit() == false && GameState.instance().hasActiveLightSource())
+        if(GameState.instance().getAdventurersCurrentRoom().isLit() || GameState.instance().hasActiveLightSource())
         {
             String description;
             if (beenHere) {
