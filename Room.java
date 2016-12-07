@@ -217,23 +217,28 @@ public class Room {
      * @return an appropriate description of the Room and its contents
      */
     public String describe() {
-        String description;
-        if (beenHere) {
-            description = title;
-        } else {
-            description = title + "\n" + desc;
-        }
-        for (Item item : contents) {
-            description += "\nThere is a " + item.getPrimaryName() + " here.";
-        }
-        if (contents.size() > 0) { description += "\n"; }
-        if (!beenHere) {
-            for (Exit exit : exits) {
-                description += "\n" + exit.describe();
+        if(GameState.instance().getAdventurersCurrentRoom().isLit() == false && GameState.instance().hasActiveLightSource())
+        {
+            String description;
+            if (beenHere) {
+                description = title;
+            } else {
+                description = title + "\n" + desc;
             }
+            for (Item item : contents) {
+                description += "\nThere is a " + item.getPrimaryName() + " here.";
+            }
+            if (contents.size() > 0) { description += "\n"; }
+            if (!beenHere) {
+                for (Exit exit : exits) {
+                    description += "\n" + exit.describe();
+                }
+            }
+            beenHere = true;
+            return description;
+        } else {
+            return "It is too dark to see in here!";
         }
-        beenHere = true;
-        return description;
     }
     
     /**
