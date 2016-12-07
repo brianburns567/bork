@@ -24,16 +24,18 @@ class ToggleLightCommand extends Command {
        * Returns the String indicating the change in state of the light source
        * @return String the message reflecting the change or lack of change in the light sources state
        */
+      @Override
        public String execute() {
-            LightSource lsReferredTo = null;
+            Item itemReferredTo = null;
             try {
-                  lsReferredTo = GameState.instance().getItemInVicinityNamed(lightSourceName);
+                  itemReferredTo = GameState.instance().getItemInVicinityNamed(lightSourceName);
             } catch (Item.NoItemException e) {
                   return "There's no " + lightSourceName + " here.";
             }
-            if (!(lsReferredTo instanceof LightSource)){
+            if (!(itemReferredTo instanceof LightSource)){
                   return "The " + lightSourceName + " is not a light source.";
             }
+            LightSource lsReferredTo = (LightSource)itemReferredTo;
             if (toggleState.equals("on")) {
                   if (lsReferredTo.isLit()) {
                         return "The " + lightSourceName + " is already on.";
@@ -41,7 +43,7 @@ class ToggleLightCommand extends Command {
                         lsReferredTo.toggleLight();
                         String msg = "The " + lightSourceName + " casts light around you.";
                         if (!GameState.instance().getAdventurersCurrentRoom().isLit()) {
-                              msg += "\n" + GameState.instance().getAdventurersCurrentRoom().desc();
+                              msg += "\n" + GameState.instance().getAdventurersCurrentRoom().describe();
                         }
                         return msg;
                   } else { 
