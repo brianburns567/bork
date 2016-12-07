@@ -199,14 +199,11 @@ public class Room {
             String[] npcHealths = npcLine.split(",");
             for (String npcHealth : npcHealths) {
                 String[] nH = npcHealth.split(" ");
-                try {
-                    for (NPC npc : npcList) {
-                        if (npc.getName().equals(nH[0])) {
-                            npc.setHealth(Integer.parseInt(nH[1]));
-                        }
+                
+                for (NPC npc : npcList) {
+                    if (npc.getName().equals(nH[0])) {
+                        npc.setHealth(Integer.parseInt(nH[1]));
                     }
-                } catch (NPC.NoNPCException e) {
-                    throw new GameState.IllegalSaveFormatException("No such NPC '" + ng[0] + "'");
                 }
             }
         }   
