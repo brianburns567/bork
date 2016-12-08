@@ -160,7 +160,7 @@ public class Room {
             for (int i = 0; i < npcList.size() - 1; i++) {
                 w.print(npcList.get(i).getName() + " " + npcList.get(i).getHealth() + ",");
             }
-            w.print(npcList.get(npcList.size() - 1).getName() + " " + npcList.get(npcList.size() - 1).getHealth());
+            w.println(npcList.get(npcList.size() - 1).getName() + " " + npcList.get(npcList.size() - 1).getHealth());
         }
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
@@ -195,8 +195,8 @@ public class Room {
                         "No such item '" + itemName + "'");
                 }
             }
+            line = s.nextLine();
         }
-        line = s.nextLine();
         if (line.startsWith(NPC_STARTER)) {
             String npcLine = line.substring(NPC_STARTER.length());
             String[] npcHealths = npcLine.split(",");
@@ -209,8 +209,9 @@ public class Room {
                     }
                 }
             }
+            s.nextLine();
         }   
-        s.nextLine();  // Consume "---".
+        //s.nextLine();  // Consume "---".
     }
 
     /**
