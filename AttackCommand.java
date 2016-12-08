@@ -42,14 +42,21 @@ class AttackCommand extends Command {
                 weaponDamage = 1; //if it is not a weapon
             }
             NPC targetNPC = GameState.instance().getNpcInVicinityNamed(targetName);
+            boolean willDie = weaponDamage+(playerScore/2) < targetNPC.getHealth();
             targetNPC.wound(weaponDamage+(playerScore/2));
 
-            if(weaponDamage+(playerScore/2) >= targetNPC.getHealth()) //Make sure the NPC isn't dead
+            if(willDie) //Make sure the NPC isn't dead
             {
                 //NPC attack phase
                 int NPCScore = targetNPC.getScore();
                 weaponDamage = targetNPC.getWeapon().getDamage();
                 GameState.instance().wound(weaponDamage+(NPCScore/2));
+            }
+            else 
+            {
+                String dieString = "The " + targetNPC.getName() + " has been slain.\n";
+                targetNPC.die();
+                return dieString;
             }
           } catch (Item.NoItemException ex) {
               return "You do not have the " + this.weaponName + " to attack with.";

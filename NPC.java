@@ -1,6 +1,7 @@
 package bork;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -40,7 +41,7 @@ public class NPC
     ) throws NoNpcException, Dungeon.IllegalDungeonFormatException
     {
         inventory = new ArrayList<Item>();
-        health = 0;
+        health = 100;
         desc = "";
         
         name = s.nextLine();
@@ -153,19 +154,27 @@ public class NPC
     public void wound(int damage)
     {
         this.health -= damage;
-        if(this.health <= 0) {
-            die();
-        }
+        //if(this.health <= 0) {
+          //  die();
+        //}
     }
     
     /**
      * Kills a NPC and removes them from the dungeon
      */
     void die(){
-        for(Item item : inventory){
-            remove(item);
+///        for(Item item : inventory){
+///            remove(item);
+///            this.currentRoom.add(item);
+///        }
+        Iterator<Item> iter = inventory.iterator();
+
+        while (iter.hasNext()) {
+            Item item = iter.next();
             this.currentRoom.add(item);
+            iter.remove();
         }
+        
         this.currentRoom.removeNPC(this);
         GameState.instance().getDungeon().removeNPC(this.name);
     }
