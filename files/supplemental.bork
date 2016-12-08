@@ -1,5 +1,5 @@
 Trinkle
-Group Bork v1.0
+Group Bork v3.0b
 ===
 Items:
 Bomb
@@ -49,7 +49,7 @@ Weapons:
 Sword
 25
 ---
-25
+80
 ---
 Dagger
 10
@@ -59,7 +59,7 @@ Dagger
 spear
 20
 ---
-50
+2
 ---
 ===
 Lights:
@@ -153,8 +153,8 @@ Basement hallway
 NPCs:
 Troll
 50
-Basement Hallway
+Basement hallway
 Inventory: spear
-There is a fierce-looking troll standing in front of you wielding a spear.
+There is a fierce-looking Troll standing in front of you wielding a spear.
 ---
 ===
