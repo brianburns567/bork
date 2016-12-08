@@ -41,6 +41,7 @@ public class NPC
     {
         inventory = new ArrayList<Item>();
         health = 0;
+        desc = "";
         
         name = s.nextLine();
         if (name.equals(Dungeon.TOP_LEVEL_DELIM)) {
@@ -49,7 +50,6 @@ public class NPC
         
         score = Integer.valueOf(s.nextLine());
         currentRoom = d.getRoom(s.nextLine());
-        currentRoom.addNPC(this);
         
         String lineOfDesc = s.nextLine();
         while (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM) &&
@@ -73,6 +73,8 @@ public class NPC
             }
             lineOfDesc = s.nextLine();
         }
+        currentRoom.addNPC(this);
+        d.add(this);
     }
     
     /**
