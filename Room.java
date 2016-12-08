@@ -261,7 +261,7 @@ public class Room {
             if (contents.size() > 0) { description += "\n"; }
             //List & describe NPCs
             for (NPC npc : npcList) {
-                description += "\n" + desc;
+                description += "\n" + npc.describe();
             }
             if (npcList.size() > 0) { description += "\n"; }
             //List & describe exits
