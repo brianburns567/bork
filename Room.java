@@ -97,6 +97,8 @@ public class Room {
                             "No such item '" + itemName + "'");
                     }
                 }
+            } else if (lineOfDesc.startsWith("Dark")) {
+                this.isLit = false;
             } else {
                 desc += lineOfDesc + "\n";
             }
