@@ -117,6 +117,7 @@ public class Room {
     private void init() {
         contents = new ArrayList<Item>();
         exits = new ArrayList<Exit>();
+        npcList = new ArrayList<NPC>();
         beenHere = false;
     }
     
@@ -230,7 +231,7 @@ public class Room {
             }
             if (contents.size() > 0) { description += "\n"; }
             for (NPC npc : npcList) {
-                description += "\n" + desc;
+                description += "\n" + npc.describe();
             }
             if (npcList.size() > 0) { description += "\n"; }
             if (!beenHere) {
